@@ -1,63 +1,44 @@
-const ListContent = () => (
-  <div className="flex flex-col gap-8 mx-auto container p-4 md:p-8">
-    <section>
-      <div className="prose">
-        <h3>Content Type Name</h3>
-      </div>
-      {/* actions bar */}
-      <div>
-        <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-primary m-1">
-            New Content
-          </label>
-          <ul
-            tabIndex={0}
-            className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Item 2</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { client } from "../../utils";
 
-    <div className="overflow-x-auto">
-      <table className="table w-full">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Job</th>
-            <th>Favorite Color</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>1</th>
-            <td>Cy Ganderton</td>
-            <td>Quality Control Specialist</td>
-            <td>Blue</td>
-          </tr>
-          <tr className="hover">
-            <th>2</th>
-            <td>Hart Hagerty</td>
-            <td>Desktop Support Technician</td>
-            <td>Purple</td>
-          </tr>
-          <tr>
-            <th>3</th>
-            <td>Brice Swyre</td>
-            <td>Tax Accountant</td>
-            <td>Red</td>
-          </tr>
-        </tbody>
-      </table>
+const ListContent = () => {
+  const [content, setContent] = useState(null);
+  const params = useParams();
+
+  useEffect(() => {
+    refresh();
+  }, [params.content_type_id]);
+  const refresh = async () => {
+    const { data } = await client
+      .from("supacontent_content")
+      .select()
+      .filter("content_type_id", "eq", params.content_type_id);
+    setContent(data);
+  };
+
+  if (!content) return null;
+  return (
+    <div className="flex flex-col gap-8 mx-auto container p-4 md:p-8">
+      <section>
+        <button
+          className="btn btn-primary btn-sm"
+          onClick={async () => {
+            await client.from("supacontent_content").insert({
+              content_type_id: params.content_type_id,
+              data: {},
+            });
+            refresh()
+          }}
+        >
+          New
+        </button>
+      </section>
+      {content.map((item) => (
+        <span>{JSON.stringify(item.data)}</span>
+      ))}
     </div>
-  </div>
-);
+  );
+};
 
 export default ListContent;

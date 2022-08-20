@@ -16,7 +16,7 @@ const ContentTypesPage = () => {
   const { id } = useParams();
   useEffect(() => {
     fetchData();
-  }, [params.id]);
+  }, [params.content_type_id]);
   const fetchData = async () => {
     const { data } = await client
       .from("supacontent_content_types")

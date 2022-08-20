@@ -88,7 +88,7 @@ const OnboardingCard: React.FC<OnboardingCardProps> = ({
   description,
   actions,
 }) => (
-  <div className="card w-full bg-base-100 shadow-xl max-w-4xl">
+  <div className={`card w-full ${completed? "bg-success":"bg-base-100"} shadow-xl max-w-4xl`}>
     <div className="card-body flex flex-row gap-4 items-center justify-center">
       <input type="checkbox" checked={completed} className="checkbox" />
       <div>

@@ -33,7 +33,13 @@ const ContentTypesPage = () => {
           <h1 className="text-2xl font-bold">Content Types</h1>
         </div>
 
-        <ContentTypesMenu showNewButton={true} contentTypes={data || []} />
+        <ContentTypesMenu
+          showNewButton={true}
+          contentTypes={data || []}
+          buildLink={(type) =>
+            `/projects/${params.project_id}/content-types/${type.id}`
+          }
+        />
       </section>
       <Outlet context={{ refreshContentTypes: fetchData }} />
     </section>

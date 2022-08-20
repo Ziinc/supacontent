@@ -122,6 +122,7 @@ const App = () => {
               <Route path="settings" element={<ProjectSettingsPage />} />
               <Route path="content" element={<ContentPage />}>
                 <Route index element={<ListContent />} />
+                <Route path="type/:content_type_id" element={<ListContent />} />
                 {/* <Route path="/projects/:project_id/content/types/:id" element={<ListContent />} />
                   <Route
                     path="/projects/:project_id/content/types/:id/edit"
@@ -138,7 +139,7 @@ const App = () => {
               </Route>
               <Route path="content-types" element={<ContentTypesPage />}>
                 <Route path="new" element={<NewContentType />} />
-                <Route path=":id" element={<ShowContentType />} />
+                <Route path=":content_type_id" element={<ShowContentType />} />
                 <Route index element={<ContentTypesOnboarding />} />
               </Route>
             </Route>

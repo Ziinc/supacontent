@@ -2,7 +2,6 @@
 
 A self-hostable headless CMS that leverages the Supabase stack.
 
-
 ### Developer
 
 ```bash
@@ -25,13 +24,19 @@ bun cli export
 #### Issues And Workarounds
 
 Bun issues:
+
 - unit testing doesn't work, no assertions, no setup/teardown. Use jest/ts-jest instead
 - bun cannot directly run scripts that rely on n-api child_process, delegate to node.
 
 Studio issues:
+
 - does not display other schemas available inside of the database (schemas from custom migrations)
 
 JS client issues:
+
 - cannot access custom schema through client
   - cannot pass additional settings/headers to the underlying postgrest request (for switching schema)
   - workaround: namespace cli-managed tables on the public schema
+- errors relating to RLS policies are very vague and non-specific
+  - e.g. "more than one row returned by a subquery used as an expression"
+  - does not actually indicate/point out that it is an RLS issue

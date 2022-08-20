@@ -1,17 +1,26 @@
 import { useEffect, useState } from "react";
-import { Outlet, useParams } from "react-router";
+import { Outlet, useNavigate, useParams } from "react-router";
 import { ContentType } from "../types";
 import { client } from "../utils";
 import ContentTypesMenu from "./home/ContentTypesMenu";
 
 const ContentPage: React.FC = () => {
   const [contentTypes, setContentTypes] = useState<ContentType[]>(null);
+  const navigate = useNavigate();
+  const params = useParams();
   useEffect(() => {
     refreshAll();
-  }, []);
+  }, [params.content_type_id]);
 
   const refreshAll = async () => {
     const { data } = await client.from("supacontent_content_types").select("*");
+    if (data && data[0]) {
+      // take the first collection, else take first single
+      const first = data.find((ct) => ct.type === "collection") || data[0];
+      navigate(
+        `/projects/${params.project_id}/content/type/${first.id}`
+      );
+    }
     setContentTypes(data);
   };
 
@@ -30,6 +39,7 @@ const ContentPage: React.FC = () => {
             <ContentTypesMenu
               showNewButton={false}
               contentTypes={contentTypes}
+              buildLink={(type: ContentType)=>`/projects/${params.project_id}/content/type/${type.id}`}
             />
           </section>
           <Outlet />

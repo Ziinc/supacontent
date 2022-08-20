@@ -5,8 +5,13 @@ import { ContentType } from "../../types";
 interface Props {
   contentTypes: ContentType[];
   showNewButton: boolean;
+  buildLink: (type: ContentType) => string;
 }
-const ContentTypesMenu: React.FC<Props> = ({ contentTypes, showNewButton }) => {
+const ContentTypesMenu: React.FC<Props> = ({
+  buildLink,
+  contentTypes,
+  showNewButton,
+}) => {
   const params = useParams();
   const collections = contentTypes.filter((ct) => ct.type === "collection");
   const singles = contentTypes.filter((ct) => ct.type === "single");
@@ -32,12 +37,11 @@ const ContentTypesMenu: React.FC<Props> = ({ contentTypes, showNewButton }) => {
         {collections.map((type) => (
           <li key={type.id}>
             <Link
-              className={type.id === Number(params.id) ? "active" : ""}
+              className={
+                type.id === Number(params.content_type_id) ? "active" : ""
+              }
               to={{
-                pathname:
-                  "/projects/" +
-                  params.project_id +
-                  `/content-types/${type.id}`,
+                pathname: buildLink(type),
               }}
             >
               {type.name}
@@ -65,12 +69,11 @@ const ContentTypesMenu: React.FC<Props> = ({ contentTypes, showNewButton }) => {
         {singles.map((type) => (
           <li key={type.id}>
             <Link
-              className={type.id === Number(params.id) ? "active" : ""}
+              className={
+                type.id === Number(params.content_type_id) ? "active" : ""
+              }
               to={{
-                pathname:
-                  "/projects/" +
-                  params.project_id +
-                  `/content-types/${type.id}`,
+                pathname: buildLink(type),
               }}
             >
               {type.name}
