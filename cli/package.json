@@ -1,0 +1,21 @@
+{
+  "name": "cli",
+  "version": "0.0.3",
+  "module": "src/index.js",
+  "scripts": {
+    "build": "rm -rf dist/* && tsc",
+    "cli": "bun  run build && node ./dist/index.js"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^1.35.6",
+    "@types/node": "^18.7.5",
+    "comamnder": "^0.0.1-security",
+    "commander": "^9.4.0",
+    "dotenv": "^16.0.1",
+    "typescript": "^4.7.4",
+    "yargs": "^17.5.1"
+  }
+}
