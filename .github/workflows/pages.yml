@@ -37,10 +37,8 @@ jobs:
       # build app
       - name: Use Node.js 16
         uses: actions/setup-node@v3
-        working-directory: ./app
         with:
           node-version: 16
-          cache: "npm"
       - name: Install npm dependencies
         working-directory: ./app
         run: npm ci
