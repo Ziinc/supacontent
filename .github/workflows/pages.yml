@@ -41,10 +41,10 @@ jobs:
           node-version: 16
           cache: "npm"
       - name: Install npm dependencies
-        working-directory: ./cli
+        working-directory: ./app
         run: npm ci
       - name: build
-        working-directory: ./cli
+        working-directory: ./app
         run: npm run build --if-present && cp ./dist ./_site/app
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
