@@ -133,7 +133,7 @@ const App = () => {
                   />
                   <Route
                     path="/projects/:project_id/content/types/:id/view"
-                    element={<EditContentType />}
+                    ebunlement={<EditContentType />}
                   />
                   <Route
                     path="/projects/:project_id/content/types/:type_id/new"

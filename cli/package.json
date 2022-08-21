@@ -10,7 +10,7 @@
     "bun-types": "latest"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^1.35.6",
+    "@supabase/supabase-js": "2.0.0-rc.4",
     "@types/node": "^18.7.5",
     "comamnder": "^0.0.1-security",
     "commander": "^9.4.0",

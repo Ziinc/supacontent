@@ -1,6 +1,6 @@
 import { exec, execSync, spawnSync } from "child_process";
 import { program } from "commander";
-import { exportConteent } from "./export";
+import { exportContent } from "./export";
 
 program
   .command("migrate <direction>")
@@ -12,22 +12,22 @@ program
     const stdout = execSync(`dbmate ${direction}`, {
       env: {
         DATABASE_URL: process.env.DATABASE_URL + "?sslmode=disable",
-        PATH: process.env.PATH
+        PATH: process.env.PATH,
       },
     });
-    const msg = stdout.toString()
+    const msg = stdout.toString();
     if (msg) {
-        console.log(msg)
+      console.log(msg);
     }
   });
 
-program.command("export").action(async () => {
-  console.log("Initiating export");
-  exportConteent()
+program.command("export <project_id>").action(async (projectId) => {
+  console.log("Initiating export for project (id: " + projectId + ")");
+  exportContent(projectId);
 });
 
 // dev
-program.command("drop", "drops the database").action(()=> null);
+program.command("drop", "drops the database").action(() => null);
 
 // debugging
 program
