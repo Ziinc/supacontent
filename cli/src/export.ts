@@ -2,31 +2,47 @@ import { makeClient, signIn } from "./client";
 import { SERVICE_ROLE_KEY } from "./constants";
 import { writeFile } from "node:fs";
 
-export const exportContent = async (projectId: number) => {
+export const exportContent = async (
+  projectId: number,
+  options: { type: boolean }
+) => {
   let client = makeClient();
-  let accessToken;
+  let session;
   if (!SERVICE_ROLE_KEY) {
     console.log("Initiating login using EMAIL and PASSWORD env variables...");
-    const result: any = await signIn();
-    // console.log(result);
-    // accessToken = result.session.access_token;
-    // accessToken = result?.session.access_token;
-    // await client.auth.setAuth(accessToken);
+    const result: any = await signIn(client);
+    session = result.data.session;
   }
-  // @ts-ignore
-  const { data, error } = await client
-    .from("supacontent_content")
-    // .select()
-    .select(
-      `
+
+  let data;
+  if (options.type) {
+    //   @ts-ignore
+    const result = await makeClient(session)
+      .from("supacontent_content_types")
+      .select(
+        `
+      *, supacontent_content(*)
+  `
+      )
+      .filter("project_id", "eq", projectId);
+    data = result.data;
+  } else {
+    //   @ts-ignore
+    const result = await makeClient(session)
+      .from("supacontent_content")
+      .select(
+        `
       *,
       content_type:content_type_id (
-          project_id
+          *
       )
   `
-    )
-    // .filter("content_type.project_id", "eq", projectId);
-  console.log(data, error);
+      )
+      .filter("content_type.project_id", "eq", projectId)
+      .limit(1);
+
+    data = result.data;
+  }
 
   //   const data = new Uint8Array(Buffer.from("Hello Node.js"));
   writeFile("export.json", JSON.stringify(data), (err) => {

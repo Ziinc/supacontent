@@ -40,3 +40,7 @@ JS client issues:
 - errors relating to RLS policies are very vague and non-specific
   - e.g. "more than one row returned by a subquery used as an expression"
   - does not actually indicate/point out that it is an RLS issue
+- authenticating with user/pass on node is undocumented and not user friendly (needed kang ming to give some deep insider knowledge on the client auth)
+- random ts error on v2 upgrade for client().from()
+- querying docs need schema examples, how am I supposed to visualize the querying ?!?!
+  - https://supabase.com/docs/reference/javascript/next/select#query-foreign-tables

@@ -21,10 +21,13 @@ program
     }
   });
 
-program.command("export <project_id>").action(async (projectId) => {
-  console.log("Initiating export for project (id: " + projectId + ")");
-  exportContent(projectId);
-});
+program
+  .command("export <project_id>")
+  .option("-t, --type", "group content by type")
+  .action(async (projectId, options) => {
+    console.log("Initiating export for project (id: " + projectId + ")");
+    exportContent(projectId, options);
+  });
 
 // dev
 program.command("drop", "drops the database").action(() => null);

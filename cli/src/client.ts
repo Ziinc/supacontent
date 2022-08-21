@@ -7,16 +7,31 @@ import {
   PASSWORD,
 } from "./constants";
 
-export const makeClient = (USER_API_KEY = null) => {
+export const makeClient = (session = null) => {
   const key = SERVICE_ROLE_KEY || API_KEY;
 
-  return createClient(API_URL, key);
+  return createClient(
+    API_URL,
+    key,
+    session
+      ? {
+        //   auth: {persistSession: false}
+          global: {
+            headers: {
+              Authorization: `Bearer ${session.access_token}`,
+            },
+          },
+        }
+      : undefined
+  );
 };
 
-export const signIn = async () => {
-  const client = makeClient();
+export const signIn = async (client) => {
   if (!SERVICE_ROLE_KEY) {
-    return await client.auth.signInWithPassword({ email: EMAIL, password: PASSWORD });
+    return await client.auth.signInWithPassword({
+      email: EMAIL,
+      password: PASSWORD,
+    });
   } else {
     return false;
   }
