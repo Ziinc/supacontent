@@ -1,5 +1,5 @@
 # Sample workflow for building and deploying a Jekyll site to GitHub Pages
-name: Deploy Jekyll with GitHub Pages dependencies preinstalled
+name: Deploy
 
 on:
   # Runs on pushes targeting the default branch
@@ -24,6 +24,8 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
+    container:
+      options: --user root
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -39,7 +41,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: 'npm'
+          cache: "npm"
           cache-dependency-path: app/package-lock.json
       - name: Install npm dependencies
         working-directory: ./app
