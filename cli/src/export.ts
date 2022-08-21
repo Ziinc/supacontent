@@ -16,7 +16,6 @@ export const exportContent = async (
 
   let data;
   if (options.type) {
-    //   @ts-ignore
     const result = await makeClient(session)
       .from("supacontent_content_types")
       .select(
@@ -27,7 +26,6 @@ export const exportContent = async (
       .filter("project_id", "eq", projectId);
     data = result.data;
   } else {
-    //   @ts-ignore
     const result = await makeClient(session)
       .from("supacontent_content")
       .select(
