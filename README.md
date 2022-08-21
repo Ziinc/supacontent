@@ -5,6 +5,7 @@ A self-hostable headless CMS that leverages the Supabase stack.
 > **Warning: Highly experimental**. Only released for the Supabase Launch Week 5 Hackathon.
 
 > # CLICK [HERE](./app) TO ACCESS THE APP
+
 ### Why?
 
 **User-friendly editing interface**, allowing for the developer to use their tool of choice while keeping content editors happy without needing to know any technical details.
@@ -30,7 +31,28 @@ Requirements:
 
 Proceed to https://supacontent.com, create an account, and start writing!
 
+#### Querying
+
+You can query the content in existing node.js apps or browser/mobile clients using supabase-js. V2 is recommended.
+
+Relevant tables:
+
+- `supacontent_content`
+- `supacontent_content_types`
+- `supacontent_projects`
+
+### CLI
+
+This project ships with an npm CLI to allow easy management of the content and database all from the comfort of your terminal.
+
+```bash
+# install the CLI
+npm i @ziinc/supacontent
+```
+
 #### Exporting
+
+The CLI will perform a login and export the contents of a project. The project ID can be found in the url `/app/projects/:project_id`.
 
 ```
 # .env in root folder
@@ -43,16 +65,6 @@ PASSWORD=my-password
 npx supacontent export <project-id>           # list of content in the project
 npx supacontent export <project-id> --type     # list of content types, with embeded content under the content key.
 ```
-
-#### Querying
-
-You can query the content in existing node.js apps or browser/mobile clients using supabase-js. V2 is recommended.
-
-Relevant tables:
-
-- `supacontent_content`
-- `supacontent_content_types`
-- `supacontent_projects`
 
 #### Migrations
 
@@ -68,6 +80,8 @@ npm i @ziinc/supacontent
 # terminal
 npx supacontent migrate up
 ```
+
+> Note: if self-hosting, ensure that the static files compiled point to `https://your-site.com/app` so that routing in the app works.
 
 ### Developer
 
