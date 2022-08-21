@@ -64,6 +64,7 @@ DATABASE_URL=postgresql://....
 ```
 
 ```bash
+npm i @ziinc/supacontent
 # terminal
 npx supacontent migrate up
 ```

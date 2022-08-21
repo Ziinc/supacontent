@@ -29,5 +29,8 @@
     "url": "https://github.com/Ziinc/supacontent/issues"
   },
   "homepage": "https://github.com/Ziinc/supacontent#readme",
-  "description": ""
+  "description": "",
+  "bin": {
+    "supacontent": "./dist/index.js"
+  }
 }
