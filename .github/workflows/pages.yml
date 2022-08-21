@@ -34,20 +34,20 @@ jobs:
         with:
           source: ./
           destination: ./_site
-    # build app
-    - name: Use Node.js 16
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        cache: 'npm'
-    - name: Install npm dependencies
-      working-directory: ./cli
-      run: npm ci
-    - name: build
-      working-directory: ./cli
-      run: npm run build --if-present && cp ./dist ./_site/app
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v1
+      # build app
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "npm"
+      - name: Install npm dependencies
+        working-directory: ./cli
+        run: npm ci
+      - name: build
+        working-directory: ./cli
+        run: npm run build --if-present && cp ./dist ./_site/app
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
 
   # Deployment job
   deploy:
