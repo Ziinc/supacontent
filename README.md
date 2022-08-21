@@ -41,6 +41,11 @@ Relevant tables:
 - `supacontent_content_types`
 - `supacontent_projects`
 
+Example of querying content:
+```js
+const {data, error} = await client.from("supacontent_content").select().eq("id", "eq", 1)
+```
+
 ### CLI
 
 This project ships with an npm CLI to allow easy management of the content and database all from the comfort of your terminal.
