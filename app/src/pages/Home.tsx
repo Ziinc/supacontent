@@ -82,8 +82,7 @@ const Home = () => {
           actions={[
             {
               text: "Write Now",
-              onClick: () =>
-                navigate(`/projects/${params.project_id}/content`),
+              onClick: () => navigate(`/projects/${params.project_id}/content`),
             },
           ]}
         />
@@ -93,8 +92,16 @@ const Home = () => {
           title="Use Your Content!"
           description="Export or query your content directly."
           actions={[
-            { text: "Export Now", onClick: () => null },
-            { text: "Query Now", onClick: () => null },
+            {
+              text: "Export Now",
+              onClick: () =>
+                window.location.replace("https://github.com/Ziinc/supacontent#exporting"),
+            },
+            {
+              text: "Query Now",
+              onClick: () =>
+              window.location.replace("https://github.com/Ziinc/supacontent#querying"),
+            },
           ]}
         />
       </section>

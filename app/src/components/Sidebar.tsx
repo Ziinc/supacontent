@@ -16,12 +16,14 @@ const Sidebar = () => {
     {
       title: "Export",
 
-      path: `/projects/${params.project_id}/export`,
+      path: `https://github.com/Ziinc/supacontent#querying`,
+      icon: <FeatherIcon size="sm" variant="external-link" />,
     },
     {
       title: "Query",
 
-      path: `/projects/${params.project_id}/query`,
+      path: "https://github.com/Ziinc/supacontent#querying",
+      icon: <FeatherIcon size="sm" variant="external-link" />,
     },
   ];
   const footerMenu = [{ title: "Settings", path: "/settings" }];
@@ -30,9 +32,16 @@ const Sidebar = () => {
     <ul className="menu w-48 bg-base-100 text-base-content">
       {menu.map((item) => (
         <li key={item.path} className="rounded">
-          <Link to={item.path} title={item.title}>
-            {item.title}
-          </Link>
+          {item.path.includes("http") ? (
+            <a href={item.path} title={item.title} target="_blank">
+              {item.title}
+              <span className="ml-auto">{item.icon}</span>
+            </a>
+          ) : (
+            <Link to={item.path} title={item.title}>
+              {item.title}
+            </Link>
+          )}
         </li>
       ))}
     </ul>
