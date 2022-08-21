@@ -1,5 +1,5 @@
 {
-  "name": "supacontent",
+  "name": "@ziinc/supacontent",
   "version": "0.0.1",
   "module": "src/index.js",
   "scripts": {
@@ -14,5 +14,20 @@
   "dependencies": {
     "@supabase/supabase-js": "2.0.0-rc.4",
     "commander": "^9.4.0"
-  }
+  },
+  "main": "dist/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ziinc/supacontent.git"
+  },
+  "author": "Ziinc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ziinc/supacontent/issues"
+  },
+  "homepage": "https://github.com/Ziinc/supacontent#readme",
+  "description": ""
 }
