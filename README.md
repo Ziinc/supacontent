@@ -4,6 +4,7 @@ A self-hostable headless CMS that leverages the Supabase stack.
 
 > **Warning: Highly experimental**. Only released for the Supabase Launch Week 5 Hackathon.
 
+> # CLICK [HERE](./app) TO ACCESS THE APP
 ### Why?
 
 **User-friendly editing interface**, allowing for the developer to use their tool of choice while keeping content editors happy without needing to know any technical details.
