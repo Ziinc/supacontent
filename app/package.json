@@ -6,8 +6,9 @@
     "static": "cp -r public/* dist",
     "css": "tailwindcss -i ./src/main.css -o ./tmp/index.css",
     "css:watch": "bun run css -- --watch",
+    "prebuild": "npm-run-all clean static css",
     "build": "node ./build.js",
-    "build:watch": "bun run build watch",
+    "build:watch": "node ./build.js watch",
     "serve": "serve dist -s",
     "test": "jest tests",
     "start": "npm-run-all clean static -p **:watch serve"
