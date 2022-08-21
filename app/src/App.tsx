@@ -23,6 +23,9 @@ import NewProjectPage from "./pages/NewProjectPage";
 import ProjectSettingsPage from "./pages/ProjectSettingsPage";
 import NewContentType from "./pages/NewContentType";
 import ShowContentType from "./pages/ShowContentType";
+import ShowContent from "./pages/ShowContent";
+import ExportPage from "./pages/ExportPage";
+import QueryPage from "./pages/QueryPage";
 
 interface IAppContext {
   projects: Project[] | null;
@@ -90,7 +93,6 @@ const App = () => {
   };
 
   
-
   // if (params?.project_id && projects.length > 0) {
   //   return <Navigate to={`/projects/${projects[0].id}`} />;
   // }
@@ -123,6 +125,7 @@ const App = () => {
               <Route path="content" element={<ContentPage />}>
                 <Route index element={<ListContent />} />
                 <Route path="type/:content_type_id" element={<ListContent />} />
+                <Route path="type/:content_type_id/edit/:content_id" element={<ShowContent />} />
                 {/* <Route path="/projects/:project_id/content/types/:id" element={<ListContent />} />
                   <Route
                     path="/projects/:project_id/content/types/:id/edit"

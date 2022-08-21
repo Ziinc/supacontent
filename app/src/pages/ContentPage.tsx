@@ -14,14 +14,27 @@ const ContentPage: React.FC = () => {
 
   const refreshAll = async () => {
     const { data } = await client.from("supacontent_content_types").select("*");
-    if (data && data[0]) {
+    if (data && data[0] && !params.content_type_id) {
       // take the first collection, else take first single
       const first = data.find((ct) => ct.type === "collection") || data[0];
-      navigate(
-        `/projects/${params.project_id}/content/type/${first.id}`
-      );
+      navigate(`/projects/${params.project_id}/content/type/${first.id}`);
     }
     setContentTypes(data);
+  };
+  const handleCreate = async (type: "collection" | "single") => {
+    const { data, error } = await client
+      .from<ContentType>("supacontent_content_types")
+      .insert(
+        {
+          name: "Untitled",
+          type: "collection",
+          project_id: Number(params.project_id),
+          fields: [],
+        },
+        { returning: "representation" }
+      );
+    console.log(data);
+    navigate(`/projects/${params.project_id}/content-types/${data[0].id}`);
   };
 
   return (
@@ -39,34 +52,31 @@ const ContentPage: React.FC = () => {
             <ContentTypesMenu
               showNewButton={false}
               contentTypes={contentTypes}
-              buildLink={(type: ContentType)=>`/projects/${params.project_id}/content/type/${type.id}`}
+              buildLink={(type: ContentType) =>
+                `/projects/${params.project_id}/content/type/${type.id}`
+              }
             />
           </section>
           <Outlet />
         </>
       ) : (
-        <div className="flex flex-col items-center mx-auto my-auto prose">
+        <div className="flex flex-col items-center mx-auto my-auto prose max-w-lg">
           <h3>Lets get started!</h3>
           <p>You'll need to add a Content Type first to create new content.</p>
-          <button
-            className="btn btn-primary"
-            onClick={async () => {
-              const { data, error } = await client
-                .from<ContentType>("supacontent_content_types")
-                .insert(
-                  {
-                    name: "Untitled",
-                    type: "collection",
-                  },
-                  { returning: "minimal" }
-                );
-              console.log(data);
-              // navigate(`/content-types/${data.id}`)
-            }}
-          >
-            New collection
-          </button>
-          <button className="btn btn-primary">New single</button>
+          <div className="flex flex-row justify-around gap-8 w-full">
+            <button
+              className="btn btn-primary"
+              onClick={() => handleCreate("collection")}
+            >
+              New collection
+            </button>
+            <button
+              className="btn btn-primary"
+              onClick={() => handleCreate("single")}
+            >
+              New single
+            </button>
+          </div>
         </div>
       )}
     </div>

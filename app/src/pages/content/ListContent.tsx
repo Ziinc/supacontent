@@ -1,10 +1,17 @@
+import { isEmpty } from "lodash";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { Navigate, useLocation, useNavigate, useParams } from "react-router";
+import { Link } from "react-router-dom";
+import ContentSummary from "../../components/ContentSummary";
+import { Content } from "../../types";
 import { client } from "../../utils";
 
 const ListContent = () => {
   const [content, setContent] = useState(null);
+  const [contentType, setContentType] = useState(null);
   const params = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     refresh();
@@ -12,9 +19,25 @@ const ListContent = () => {
   const refresh = async () => {
     const { data } = await client
       .from("supacontent_content")
-      .select()
-      .filter("content_type_id", "eq", params.content_type_id);
+      .select(
+        `
+      *,
+      content_type:content_type_id (
+        *
+      )
+      `
+      )
+      .filter("content_type_id", "eq", params.content_type_id)
+      .filter("content_type.project_id", "eq", params.project_id);
+    console.log(data);
     setContent(data);
+
+    const { data: contentTypeData } = await client
+      .from("supacontent_content_types")
+      .select("*")
+      .filter("id", "eq", params.content_type_id)
+      .single();
+    setContentType(contentTypeData);
   };
 
   if (!content) return null;
@@ -24,19 +47,31 @@ const ListContent = () => {
         <button
           className="btn btn-primary btn-sm"
           onClick={async () => {
-            await client.from("supacontent_content").insert({
-              content_type_id: params.content_type_id,
-              data: {},
-            });
-            refresh()
+            const { data } = await client.from("supacontent_content").insert(
+              {
+                content_type_id: params.content_type_id,
+                data: {},
+              },
+              { returning: "representation" }
+            );
+            navigate(
+              `/projects/${params.project_id}/content/type/${params.content_type_id}/edit/${data[0].id}`
+            );
+
+            refresh();
           }}
         >
           New
         </button>
       </section>
-      {content.map((item) => (
-        <span>{JSON.stringify(item.data)}</span>
-      ))}
+      <section className="flex flex-col gap-4">
+        {content.map((item: Content) => (
+          <Link to={location.pathname + "/edit/" + item.id}>
+            <ContentSummary content={item} contentType={contentType} />
+           
+          </Link>
+        ))}
+      </section>
     </div>
   );
 };

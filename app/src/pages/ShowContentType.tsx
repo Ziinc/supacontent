@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router";
 import FeatherIcon from "../components/Icon";
+import ToggleEdit from "../components/ToggleEdit";
 import ContentTypeFieldForm from "../interfaces/ContentTypes/ContentTypeFieldForm";
 import { ContentType } from "../types";
 import { client } from "../utils";
@@ -13,7 +14,7 @@ const ContentTypesPage = () => {
   console.log(refreshContentTypes);
   const [data, setData] = useState<ContentType>(null);
   const [showNewForm, setShowNewForm] = useState(false);
-  const { id } = useParams();
+  const { content_type_id } = useParams();
   useEffect(() => {
     fetchData();
   }, [params.content_type_id]);
@@ -21,7 +22,7 @@ const ContentTypesPage = () => {
     const { data } = await client
       .from("supacontent_content_types")
       .select("*")
-      .filter("id", "eq", id)
+      .filter("id", "eq", content_type_id)
       .single();
     setData(data);
   };
@@ -30,7 +31,20 @@ const ContentTypesPage = () => {
     <section className="flex flex-col p-4 w-full gap-4">
       <div className="flex flex-row justify-between w-full">
         <div className="prose">
-          <h3>{data?.name}</h3>
+          <ToggleEdit
+            onSave={async (name) => {
+              const { data: result } = await client
+                .from("supacontent_content_types")
+                .update({
+                  name,
+                })
+                .match({ id: data.id });
+              setData(result[0]);
+            }}
+            tag="h3"
+            tagClassName="m-0"
+            value={data?.name}
+          />
         </div>
         <button
           type="button"

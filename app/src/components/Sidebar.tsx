@@ -7,12 +7,21 @@ import FeatherIcon from "./Icon";
 const Sidebar = () => {
   const params = useParams();
   const appContext = useAppContext();
-  console.log(params);
   const mainMenu = [
     { title: "Content", path: `/projects/${params.project_id}/content` },
     {
       title: "Content Types",
       path: `/projects/${params.project_id}/content-types`,
+    },
+    {
+      title: "Export",
+
+      path: `/projects/${params.project_id}/export`,
+    },
+    {
+      title: "Query",
+
+      path: `/projects/${params.project_id}/query`,
     },
   ];
   const footerMenu = [{ title: "Settings", path: "/settings" }];
@@ -63,7 +72,12 @@ const Sidebar = () => {
                 <li className="p-2 font-bold text-sm">Switch project</li>
                 {otherProjects.map((project) => (
                   <li>
-                    <Link className="truncate w-40" to={`/projects/${project.id}`}>{project.name}</Link>
+                    <Link
+                      className="truncate w-40"
+                      to={`/projects/${project.id}`}
+                    >
+                      {project.name}
+                    </Link>
                   </li>
                 ))}
               </>

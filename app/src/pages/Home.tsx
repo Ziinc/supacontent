@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router";
 import { useAppContext } from "../App";
+import ToggleEdit from "../components/ToggleEdit";
 import { client } from "../utils";
 import UsageStats from "./home/UsageStats";
 
@@ -9,7 +10,7 @@ const Home = () => {
     content: 0,
     contentTypes: 0,
   });
-  const { user, refreshProjects } = useAppContext();
+  const { user, refreshProjects, projects } = useAppContext();
   const navigate = useNavigate();
   const params = useParams();
   useEffect(() => {
@@ -29,8 +30,32 @@ const Home = () => {
     });
   };
 
+  const currentProject = (projects || []).find(
+    (project) => project.id === Number(params.project_id)
+  );
+  if (!currentProject) return null;
+
   return (
     <div className="flex flex-col mx-auto container p-8 gap-4 items-center">
+      {/* title */}
+
+      <ToggleEdit
+        className="self-start"
+        onSave={async (name) => {
+          await client
+            .from("supacontent_projects")
+            .update({
+              name,
+            })
+            .match({ id: currentProject.id });
+
+          refreshProjects();
+        }}
+        tag="h2"
+        tagClassName="text-3xl font-bold m-0"
+        value={currentProject.name}
+      />
+
       {/* stats */}
       <UsageStats counts={counts} />
 
@@ -54,7 +79,13 @@ const Home = () => {
           completed={counts.content > 0}
           title="Write Some Content!"
           description="Fill in your content."
-          actions={[{ text: "Write Now", onClick: () => null }]}
+          actions={[
+            {
+              text: "Write Now",
+              onClick: () =>
+                navigate(`/projects/${params.project_id}/content`),
+            },
+          ]}
         />
         <OnboardingCard
           enabled={counts.content > 0}
@@ -88,11 +119,15 @@ const OnboardingCard: React.FC<OnboardingCardProps> = ({
   description,
   actions,
 }) => (
-  <div className={`card w-full ${completed? "bg-success":"bg-base-100"} shadow-xl max-w-4xl`}>
+  <div
+    className={`card w-full ${
+      completed ? "bg-success" : "bg-base-100"
+    } shadow-xl max-w-4xl`}
+  >
     <div className="card-body flex flex-row gap-4 items-center justify-center">
       <input type="checkbox" checked={completed} className="checkbox" />
       <div>
-        <h2 className="card-title flex justify-between">{title}</h2>
+        <h3 className="card-title flex justify-between">{title}</h3>
         <p>{description}</p>
       </div>
       <div className="card-actions ml-auto">

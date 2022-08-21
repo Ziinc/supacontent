@@ -9,5 +9,5 @@ export interface ContentTypeDatum {
 
 export interface Field {
   name: string;
-  type: "short-text" | "long-text";
+  type: "short-text" | "long-text" | "rich-text";
 }
