@@ -1,5 +1,8 @@
 # SupaContent
 
+> _Be supa content with your content - Ziinc, 2022, Bali_
+
+
 A self-hostable headless CMS that leverages the Supabase stack.
 
 > **Warning: Highly experimental**. Only released for the Supabase Launch Week 5 Hackathon.
