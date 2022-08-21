@@ -5,3 +5,4 @@ node_modules/
 **/supabase/.temp
 
 **/export.json
+.env
