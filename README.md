@@ -108,6 +108,20 @@ bun cli export <project-id>
 bun cli export <project-id> --type
 ```
 
+#### Tech Stack
+APP
+- esbuild
+- tailwindcss, daisy-ui
+- react
+- supabase js v1
+
+CLI
+- commander.js
+- typescript, tsc compilation
+- dbmate (for migrations)
+- supabase cli (for local dev)
+- supabase js v2 (for exporting)
+
 #### Issues And Workarounds
 
 Bun issues:
