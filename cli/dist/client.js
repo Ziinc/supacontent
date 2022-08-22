@@ -14,16 +14,9 @@ const supabase_js_1 = require("@supabase/supabase-js");
 const constants_1 = require("./constants");
 const makeClient = (session = null) => {
     const key = constants_1.SERVICE_ROLE_KEY || constants_1.API_KEY;
-    return (0, supabase_js_1.createClient)(constants_1.API_URL, key, session
-        ? {
-            //   auth: {persistSession: false}
-            global: {
-                headers: {
-                    Authorization: `Bearer ${session.access_token}`,
-                },
-            },
-        }
-        : undefined);
+    return (0, supabase_js_1.createClient)(constants_1.API_URL, key, {
+        auth: { persistSession: false, autoRefreshToken: false },
+    });
 };
 exports.makeClient = makeClient;
 const signIn = (client) => __awaiter(void 0, void 0, void 0, function* () {

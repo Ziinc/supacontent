@@ -23,7 +23,7 @@ const exportContent = (projectId, options) => __awaiter(void 0, void 0, void 0, 
     }
     let data;
     if (options.type) {
-        const result = yield (0, client_1.makeClient)(session)
+        const result = yield client
             .from("supacontent_content_types")
             .select(`
       *, supacontent_content(*)
@@ -44,6 +44,7 @@ const exportContent = (projectId, options) => __awaiter(void 0, void 0, void 0, 
             .limit(1);
         data = result.data;
     }
+    console.log('data', data);
     //   const data = new Uint8Array(Buffer.from("Hello Node.js"));
     (0, node_fs_1.writeFile)("export.json", JSON.stringify(data), (err) => {
         if (err)
