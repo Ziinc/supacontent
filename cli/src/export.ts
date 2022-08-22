@@ -44,7 +44,6 @@ export const exportContent = async (
     
   }
 
-  console.log('data', data)
   //   const data = new Uint8Array(Buffer.from("Hello Node.js"));
   writeFile("export.json", JSON.stringify(data), (err) => {
     if (err) throw err;
