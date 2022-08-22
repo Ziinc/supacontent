@@ -10,20 +10,9 @@ import {
 export const makeClient = (session = null) => {
   const key = SERVICE_ROLE_KEY || API_KEY;
 
-  return createClient(
-    API_URL,
-    key,
-    session
-      ? {
-        //   auth: {persistSession: false}
-          global: {
-            headers: {
-              Authorization: `Bearer ${session.access_token}`,
-            },
-          },
-        }
-      : undefined
-  );
+  return createClient(API_URL, key, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
 };
 
 export const signIn = async (client) => {

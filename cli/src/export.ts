@@ -16,8 +16,9 @@ export const exportContent = async (
 
   let data;
   if (options.type) {
-    const result = await makeClient(session)
-      .from("supacontent_content_types")
+    const result = 
+    await client  
+    .from("supacontent_content_types")
       .select(
         `
       *, supacontent_content(*)
@@ -40,8 +41,10 @@ export const exportContent = async (
       .limit(1);
 
     data = result.data;
+    
   }
 
+  console.log('data', data)
   //   const data = new Uint8Array(Buffer.from("Hello Node.js"));
   writeFile("export.json", JSON.stringify(data), (err) => {
     if (err) throw err;
