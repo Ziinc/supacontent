@@ -7,7 +7,7 @@ A self-hostable headless CMS that leverages the Supabase stack.
 
 > **Warning: Highly experimental**. Only released for the Supabase Launch Week 5 Hackathon.
 
-> # CLICK [HERE](./app) TO ACCESS THE APP
+> # CLICK [HERE](https://supacontent.com/app) TO ACCESS THE APP
 
 ### Why?
 
