@@ -23,7 +23,7 @@ export type ContentTypeParams = Omit<
 
 export interface ContentTypeField {
   name: string;
-  type: "short-text" | "long-text" | "rich-text";
+  type: "short-text" | "long-text" | "rich-text" | "boolean";
 }
 
 export interface Project {

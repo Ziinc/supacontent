@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
+import BooleanEditor from "../components/editors/BooleanEditor";
 import LongTextEditor from "../components/editors/LongTextEditor";
 import Editor from "../components/editors/RichTextEditor";
 import ShortTextEditor from "../components/editors/ShortTextEditor";
@@ -73,7 +74,6 @@ const ShowContent = () => {
           };
           return (
             <div>
-              <h4>{field.name}</h4>
               {field.type === "short-text" && (
                 <ShortTextEditor
                   field={field}
@@ -104,6 +104,13 @@ const ShowContent = () => {
                       .eq("id", content.id);
                     setContent(data[0]);
                   }}
+                />
+              )}
+              {field.type === "boolean" && (
+                <BooleanEditor
+                  field={field}
+                  value={content.data[field.name]}
+                  onSave={handleSave}
                 />
               )}
             </div>

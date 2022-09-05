@@ -23,9 +23,13 @@ const RichTextEditor: React.FC<EditorProps<OutputData>> = ({
     });
   }, []);
   return (
-    <div className=" w-full border border-primary rounded-lg p-3 focus-within:outline outline-offset-2 outline-2 outline-primary">
-      <div id={editorId} className="max-w-2xl ml-10" />
-    </div>
+    <>
+      <h4>{field.name}</h4>
+
+      <div className=" w-full border border-primary rounded-lg p-3 focus-within:outline outline-offset-2 outline-2 outline-primary">
+        <div id={editorId} className="max-w-2xl ml-10" />
+      </div>
+    </>
   );
 };
 export default RichTextEditor;

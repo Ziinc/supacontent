@@ -9,14 +9,17 @@ const ShortTextEditor: React.FC<EditorProps<string>> = ({
   const handleSave = debounce(onSave, 400);
 
   return (
-    <input
-      type="text"
-      defaultValue={value}
-      className="input input-bordered input-primary w-full max-w-md"
-      onChange={(e) => {
-        handleSave(e.target.value);
-      }}
-    />
+    <>
+      <h4>{field.name}</h4>
+      <input
+        type="text"
+        defaultValue={value}
+        className="input input-bordered input-primary w-full max-w-md"
+        onChange={(e) => {
+          handleSave(e.target.value);
+        }}
+      />
+    </>
   );
 };
 

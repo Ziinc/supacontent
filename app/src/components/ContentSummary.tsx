@@ -1,5 +1,6 @@
 import { isEmpty } from "lodash";
 import { Content, ContentType } from "../types";
+import FeatherIcon from "./Icon";
 import RichTextViewer from "./viewers/RichTextViewer";
 
 interface Props {
@@ -31,6 +32,18 @@ const ContentSummary: React.FC<Props> = ({ content, contentType }) => {
                   )}
                   {field.type === "rich-text" && (
                     <RichTextViewer value={value} />
+                  )}
+                  {field.type === "boolean" && (
+                    <div>
+                      <div className="flex flex-row gap-10 align-center">
+                        <span>{field.name}</span>
+                        {value ? (
+                          <FeatherIcon variant="check-square" />
+                        ) : (
+                          <FeatherIcon variant="x-square" />
+                        )}
+                      </div>
+                    </div>
                   )}
                 </div>
               </div>

@@ -45,6 +45,7 @@ const ContentTypeFieldForm: React.FC<Props> = ({ onCancel, onSubmit }) => {
               <option value="short-text">Short text</option>
               <option value="long-text">Long text</option>
               <option value="rich-text">Rich text</option>
+              <option value="boolean">Boolean</option>
             </select>
           </div>
 

@@ -5,15 +5,18 @@ const LongTextEditor: React.FC<EditorProps<string>> = ({
   field,
   onSave,
 }) => {
-  const handleSave = debounce(onSave, 400)
+  const handleSave = debounce(onSave, 400);
   return (
-    <textarea
-      defaultValue={value}
-      className="textarea textarea-primary w-full max-w-md"
-      onChange={(e) => {
-        handleSave(e.target.value);
-      }}
-    />
+    <>
+      <h4>{field.name}</h4>
+      <textarea
+        defaultValue={value}
+        className="textarea textarea-primary w-full max-w-md"
+        onChange={(e) => {
+          handleSave(e.target.value);
+        }}
+      />
+    </>
   );
 };
 
