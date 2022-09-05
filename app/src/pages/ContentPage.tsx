@@ -33,7 +33,6 @@ const ContentPage: React.FC = () => {
         },
         { returning: "representation" }
       );
-    console.log(data);
     navigate(`/projects/${params.project_id}/content-types/${data[0].id}`);
   };
 

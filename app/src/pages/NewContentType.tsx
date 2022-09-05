@@ -5,12 +5,10 @@ import { ContentType, Project } from "../types";
 import { client } from "../utils";
 
 const NewContentType = () => {
-  const appContext = useAppContext();
   const navigate = useNavigate();
   const params = useParams();
   const basePath = `/projects/${params.project_id}`;
   const [searchParams] = useSearchParams();
-  console.log(params);
   const { refreshContentTypes }: any = useOutletContext();
   return (
     <>
@@ -29,8 +27,6 @@ const NewContentType = () => {
               },
               { returning: "representation" }
             );
-          // ).limit(1);
-          console.log("data", data);
           await refreshContentTypes();
           navigate(`${basePath}/content-types/${data[0].id}`);
         }}

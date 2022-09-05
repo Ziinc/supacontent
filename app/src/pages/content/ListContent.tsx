@@ -29,7 +29,6 @@ const ListContent = () => {
       )
       .filter("content_type_id", "eq", params.content_type_id)
       .filter("content_type.project_id", "eq", params.project_id);
-    console.log(data);
     setContent(data);
 
     const { data: contentTypeData } = await client

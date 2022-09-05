@@ -13,11 +13,12 @@ const Auth = () => {
     const { user, error } =
       type === "LOGIN"
         ? await client.auth.signIn({ email, password })
-        : await client.auth.signUp({ email, password }).then(() => {
+        : await client.auth.signUp({ email, password }).then((res) => {
             setHelperText({
               error: null,
               text: "Sign up email sent, check your email!",
             });
+            return res
           });
 
     if (error) {

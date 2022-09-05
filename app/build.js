@@ -1,8 +1,6 @@
 const esbuild = require("esbuild");
 require("dotenv").config();
 const watch = process.argv[2] ? true : false;
-console.log(process.env.SUPABASE_API_KEY)
-console.log(process.env.SUPABASE_API_URL)
 const base = {
   logLevel: "info",
   bundle: true,
@@ -41,4 +39,3 @@ esbuild
   )
   .catch(() => process.exit(1));
 
-console.log();

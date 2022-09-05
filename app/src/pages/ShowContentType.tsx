@@ -5,13 +5,11 @@ import ToggleEdit from "../components/ToggleEdit";
 import ContentTypeFieldForm from "../interfaces/ContentTypes/ContentTypeFieldForm";
 import { ContentType } from "../types";
 import { client } from "../utils";
-import ContentTypesMenu from "./home/ContentTypesMenu";
 
 const ContentTypesPage = () => {
   const { refreshContentTypes }: any = useOutletContext();
   const params = useParams();
   const navigate = useNavigate();
-  console.log(refreshContentTypes);
   const [data, setData] = useState<ContentType>(null);
   const [showNewForm, setShowNewForm] = useState(false);
   const { content_type_id } = useParams();
@@ -26,7 +24,6 @@ const ContentTypesPage = () => {
       .single();
     setData(data);
   };
-  console.log("data", data);
   return (
     <section className="flex flex-col p-4 w-full gap-4">
       <div className="flex flex-row justify-between w-full">
@@ -99,7 +96,6 @@ const ContentTypesPage = () => {
         <ContentTypeFieldForm
           onCancel={() => setShowNewForm(false)}
           onSubmit={async (params) => {
-            console.log(params);
             const { data: result } = await client
               .from("supacontent_content_types")
               .update({

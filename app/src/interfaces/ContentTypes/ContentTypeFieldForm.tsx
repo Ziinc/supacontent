@@ -7,14 +7,19 @@ interface Props {
   onCancel: () => void;
   defaultValue?: Field;
 }
+interface FormData {
+  name: { value: string };
+  type: { value: Field["type"] };
+}
 const ContentTypeFieldForm: React.FC<Props> = ({ onCancel, onSubmit }) => {
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
+        const formData = e.target as typeof e.target & FormData;
         onSubmit({
-          name: e.target.name.value as string,
-          type: e.target.type.value as Field["type"],
+          name: formData.name.value,
+          type: formData.type.value,
         });
       }}
     >

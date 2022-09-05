@@ -10,8 +10,11 @@
     "build": "node ./build.js",
     "build:watch": "node ./build.js watch",
     "serve": "serve dist -s",
-    "test": "jest tests",
-    "start": "npm-run-all clean static -p **:watch serve"
+    "test": "CI=true jest tests",
+    "test:watch": "bun run test -- --watchAll",
+    "check": "tsc --noEmit --preserveWatchOutput",
+    "check:watch": "bun run check -- --watch",
+    "start": "npm-run-all clean static css -p **:watch serve"
   },
   "dependencies": {
     "@editorjs/editorjs": "^2.25.0",

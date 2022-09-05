@@ -2,7 +2,7 @@ export interface Content {
   id: number;
   content_type_id: number;
   data: {
-    [name: string]: OutputData;
+    [name: string]: any;
   };
   inserted_at: string;
   updated_at: string;
