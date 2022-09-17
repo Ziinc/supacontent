@@ -1,0 +1,8 @@
+node_modules/
+# Supabase
+**/supabase/.branches
+**/supabase/.temp
+
+**/export.json
+/.env/
+dist/
