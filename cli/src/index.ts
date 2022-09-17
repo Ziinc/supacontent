@@ -2,6 +2,17 @@ import { exec, execSync, spawnSync } from "child_process";
 import { program } from "commander";
 import { exportContent } from "./export";
 
+// add secret env var
+
+const fs = require('fs')
+require("dotenv").config({path:  ".env.secret"});
+
+const env = process.env.NODE_ENV || 'dev'
+console.log('env', env)
+require("dotenv").config({path: `.env.${env}`, override: true});
+require("dotenv").config({path: `.env.${env}.secret`, override: true});
+
+
 program
   .command("migrate <direction>")
   .action(async (direction: "up" | "down", _options, command) => {

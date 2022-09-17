@@ -1,1 +1,4 @@
 my-project/
+cli/.env.prod/
+**/.env.*.secret
+**/.env.secret

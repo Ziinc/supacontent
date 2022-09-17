@@ -36,7 +36,7 @@ const AppContext = createContext<IAppContext>({
 });
 
 export const useAppContext = () => useContext(AppContext);
-const App = () => {
+const App = ({base_path = ""}) => {
   const [user, setUser] = useState<AuthUser>(null);
   const [projects, setProjects] = useState<Project[]>(null);
   useEffect(() => {
@@ -77,11 +77,11 @@ const App = () => {
             { returning: "minimal" }
           );
       }
-      refreshProjects();
+    refreshProjects();
     }
   };
   return (
-    <BrowserRouter basename="/app">
+    <BrowserRouter basename={process.env.BASE_PATH || undefined}>
       <AppContext.Provider
         value={{
           projects,
