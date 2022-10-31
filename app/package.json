@@ -9,6 +9,7 @@
     "prebuild": "npm-run-all clean static css",
     "build": "node ./build.js",
     "build:watch": "node ./build.js watch",
+    "build:ci": "npm run build && mkdir -p ../_site/app && cp -r ./dist/* ../_site/app/",
     "serve": "serve dist -s",
     "test": "CI=true jest tests",
     "test:watch": "bun run test -- --watchAll",

@@ -56,7 +56,7 @@ const config = {
             label: "Docs",
           },
           {
-            href: "https://github.com/facebook/docusaurus",
+            href: "https://github.com/Ziinc/supacontent",
             label: "GitHub",
             position: "right",
           },
@@ -70,7 +70,7 @@ const config = {
             items: [
               {
                 label: "Documentation",
-                to: "/docs/intro",
+                to: "/",
               },
               {
                 label: "Github",
