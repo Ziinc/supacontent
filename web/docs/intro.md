@@ -12,15 +12,11 @@ Supacontent ships with an npm package that provides a cli for working with the f
 
 ### Why?
 
+**Integration into existing supabase projects**. Existing features and apps can directly query data through the same familiar Supabase client interface.
 
-**Integration into existing supabase projects**, allowing existing features and apps to query the content through the same supabase client interface.
+**No more re-inventing the wheel for eacn new project**. Focus on the value-added feature buildling, instead of boilerplate functionality.
 
-**Migrations are automatically handled**, allowing the developer to focus on the UI instead of the database/api building.
-
-**No hosting lock in**, entire supabase stack can be self hosted or outsourced to a supabase(company)-managed database.
-
-
-
+**Migrations are automatically handled**. Spend your development hours on your UI instead of database/api wrangling.
 
 ### Getting Started
 
@@ -28,3 +24,5 @@ Requirements:
 
 - npm and node
 - dbmate (if self-managed or platform-managed)
+
+🚧 WIP
