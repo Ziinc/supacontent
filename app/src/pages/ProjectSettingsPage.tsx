@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router";
 import { useAppContext } from "../App";
-import { client } from "../utils";
+import { client, supacontent } from "../utils";
 
 const ProjectSettingsPage = () => {
   const params = useParams();
@@ -11,8 +11,8 @@ const ProjectSettingsPage = () => {
       <button
         className="btn btn-warning"
         onClick={async () => {
-          await client
-            .from("supacontent_projects")
+          await supacontent
+            .from("projects")
             .delete()
             .eq("id", params.project_id);
           await appContext.refreshProjects();

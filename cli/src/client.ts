@@ -12,6 +12,7 @@ export const makeClient = (session = null) => {
 
   return createClient(API_URL, key, {
     auth: { persistSession: false, autoRefreshToken: false },
+    db: {schema: "supacontent"}
   });
 };
 

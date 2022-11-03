@@ -18,17 +18,17 @@ export const exportContent = async (
   if (options.type) {
     const result = 
     await client  
-    .from("supacontent_content_types")
+    .from("content_types")
       .select(
         `
-      *, supacontent_content(*)
+      *, content(*)
   `
       )
       .filter("project_id", "eq", projectId);
     data = result.data;
   } else {
     const result = await makeClient(session)
-      .from("supacontent_content")
+      .from("content")
       .select(
         `
       *,

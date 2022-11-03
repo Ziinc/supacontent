@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate, useParams } from "react-router";
 import { ContentType } from "../types";
-import { client } from "../utils";
+import { client, supacontent } from "../utils";
 import ContentTypesMenu from "./home/ContentTypesMenu";
 
 const ContentPage: React.FC = () => {
@@ -13,7 +13,7 @@ const ContentPage: React.FC = () => {
   }, [params.content_type_id]);
 
   const refreshAll = async () => {
-    const { data } = await client.from("supacontent_content_types").select("*");
+    const { data } = await supacontent.from("content_types").select("*");
     if (data && data[0] && !params.content_type_id) {
       // take the first collection, else take first single
       const first = data.find((ct) => ct.type === "collection") || data[0];
@@ -22,8 +22,8 @@ const ContentPage: React.FC = () => {
     setContentTypes(data);
   };
   const handleCreate = async (type: "collection" | "single") => {
-    const { data, error } = await client
-      .from<ContentType>("supacontent_content_types")
+    const { data, error } = await supacontent
+      .from<ContentType>("content_types")
       .insert(
         {
           name: "Untitled",

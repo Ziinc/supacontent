@@ -2,7 +2,7 @@ import { useNavigate, useOutletContext, useParams } from "react-router";
 import { Link, useSearchParams } from "react-router-dom";
 import { useAppContext } from "../App";
 import { ContentType, Project } from "../types";
-import { client } from "../utils";
+import { client, supacontent } from "../utils";
 
 const NewContentType = () => {
   const navigate = useNavigate();
@@ -16,8 +16,8 @@ const NewContentType = () => {
         className="mx-auto container my-auto max-w-md flex flex-col gap-4"
         onSubmit={async (e) => {
           e.preventDefault();
-          const { data } = await client
-            .from<ContentType>("supacontent_content_types")
+          const { data } = await supacontent
+            .from<ContentType>("content_types")
             .insert(
               {
                 name: (e.target as any).name.value,

@@ -18,15 +18,15 @@ You can query the content in existing node.js apps or browser/mobile clients usi
 
 Relevant tables:
 
-- `supacontent_content`
-- `supacontent_content_types`
-- `supacontent_projects`
+- `supacontent.content`
+- `supacontent.content_types`
+- `supacontent.projects`
 
 Example of querying content:
 
 ```js
 const { data, error } = await client
-  .from("supacontent_content")
+  .from("content")
   .select()
   .eq("id", "eq", 1);
 ```

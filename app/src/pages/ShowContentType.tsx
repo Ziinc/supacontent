@@ -4,7 +4,7 @@ import FeatherIcon from "../components/Icon";
 import ToggleEdit from "../components/ToggleEdit";
 import ContentTypeFieldForm from "../interfaces/ContentTypes/ContentTypeFieldForm";
 import { ContentType } from "../types";
-import { client } from "../utils";
+import { client, supacontent } from "../utils";
 
 const ContentTypesPage = () => {
   const { refreshContentTypes }: any = useOutletContext();
@@ -17,8 +17,8 @@ const ContentTypesPage = () => {
     fetchData();
   }, [params.content_type_id]);
   const fetchData = async () => {
-    const { data } = await client
-      .from("supacontent_content_types")
+    const { data } = await supacontent
+      .from("content_types")
       .select("*")
       .filter("id", "eq", content_type_id)
       .single();
@@ -30,8 +30,8 @@ const ContentTypesPage = () => {
         <div className="prose">
           <ToggleEdit
             onSave={async (name) => {
-              const { data: result } = await client
-                .from("supacontent_content_types")
+              const { data: result } = await supacontent
+                .from("content_types")
                 .update({
                   name,
                 })
@@ -47,8 +47,8 @@ const ContentTypesPage = () => {
           type="button"
           className="btn btn-warning  w-64"
           onClick={async () => {
-            await client
-              .from("supacontent_content_types")
+            await supacontent
+              .from("content_types")
               .delete()
               .eq("id", data.id);
             await refreshContentTypes();
@@ -76,8 +76,8 @@ const ContentTypesPage = () => {
                     const newFields = data.fields.filter(
                       (oldField) => oldField !== field
                     );
-                    const { data: result } = await client
-                      .from("supacontent_content_types")
+                    const { data: result } = await supacontent
+                      .from("content_types")
                       .update({
                         fields: newFields,
                       })
@@ -96,8 +96,8 @@ const ContentTypesPage = () => {
         <ContentTypeFieldForm
           onCancel={() => setShowNewForm(false)}
           onSubmit={async (params) => {
-            const { data: result } = await client
-              .from("supacontent_content_types")
+            const { data: result } = await supacontent
+              .from("content_types")
               .update({
                 fields: [...data.fields, params],
               })

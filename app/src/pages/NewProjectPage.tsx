@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAppContext } from "../App";
 import { Project } from "../types";
-import { client } from "../utils";
+import { client, supacontent } from "../utils";
 
 const NewProjectPage = () => {
   const appContext = useAppContext();
@@ -12,8 +12,8 @@ const NewProjectPage = () => {
         className="mx-auto container my-auto max-w-md flex flex-col gap-4"
         onSubmit={async (e) => {
           e.preventDefault();
-          const { data } = await client
-            .from<Project>("supacontent_projects")
+          const { data } = await supacontent
+            .from<Project>("projects")
             .insert(
               {
                 name: (e.target as any).name.value,

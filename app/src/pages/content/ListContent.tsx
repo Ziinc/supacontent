@@ -4,7 +4,7 @@ import { Navigate, useLocation, useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import ContentSummary from "../../components/ContentSummary";
 import { Content } from "../../types";
-import { client } from "../../utils";
+import { client, supacontent } from "../../utils";
 
 const ListContent = () => {
   const [content, setContent] = useState(null);
@@ -17,8 +17,8 @@ const ListContent = () => {
     refresh();
   }, [params.content_type_id]);
   const refresh = async () => {
-    const { data } = await client
-      .from("supacontent_content")
+    const { data } = await supacontent
+      .from("content")
       .select(
         `
       *,
@@ -31,8 +31,8 @@ const ListContent = () => {
       .filter("content_type.project_id", "eq", params.project_id);
     setContent(data);
 
-    const { data: contentTypeData } = await client
-      .from("supacontent_content_types")
+    const { data: contentTypeData } = await supacontent
+      .from("content_types")
       .select("*")
       .filter("id", "eq", params.content_type_id)
       .single();
@@ -46,7 +46,7 @@ const ListContent = () => {
         <button
           className="btn btn-primary btn-sm"
           onClick={async () => {
-            const { data } = await client.from("supacontent_content").insert(
+            const { data } = await supacontent.from("content").insert(
               {
                 content_type_id: params.content_type_id,
                 data: {},

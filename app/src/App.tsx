@@ -1,14 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import {
-  Navigate,
-  Routes,
-  Route,
-  BrowserRouter,
-} from "react-router-dom";
+import { Navigate, Routes, Route, BrowserRouter } from "react-router-dom";
 import BaseLayout from "./layouts/BaseLayout";
 import ContentPage from "./pages/ContentPage";
 import SettingsPage from "./pages/SettingsPage";
-import { client } from "./utils";
+import { client, supacontent } from "./utils";
 import Auth from "./components/Auth";
 import ListContent from "./pages/content/ListContent";
 import Home from "./pages/Home";
@@ -36,7 +31,7 @@ const AppContext = createContext<IAppContext>({
 });
 
 export const useAppContext = () => useContext(AppContext);
-const App = ({base_path = ""}) => {
+const App = ({ base_path = "" }) => {
   const [user, setUser] = useState<AuthUser>(null);
   const [projects, setProjects] = useState<Project[]>(null);
   useEffect(() => {
@@ -54,7 +49,7 @@ const App = ({base_path = ""}) => {
   }, [user]);
 
   const refreshProjects = async () => {
-    const { data } = await client.from("supacontent_projects").select();
+    const { data } = await supacontent.from("projects").select();
     setProjects(data);
   };
 
@@ -64,11 +59,11 @@ const App = ({base_path = ""}) => {
 
   const startup = async () => {
     if (user) {
-      const { data } = await client.from("supacontent_projects").select();
+      const { data } = await supacontent.from("projects").select();
       if (data.length === 0) {
         // create default project
-        const { data: newProject } = await client
-          .from("supacontent_projects")
+        const { data: newProject } = await supacontent
+          .from("projects")
           .insert(
             {
               name: "Untitled Project",
@@ -77,7 +72,7 @@ const App = ({base_path = ""}) => {
             { returning: "minimal" }
           );
       }
-    refreshProjects();
+      refreshProjects();
     }
   };
   return (

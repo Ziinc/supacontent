@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router";
 import { useAppContext } from "../App";
 import ToggleEdit from "../components/ToggleEdit";
-import { client } from "../utils";
+import { client, supacontent } from "../utils";
 import UsageStats from "./home/UsageStats";
 
 const Home = () => {
@@ -17,12 +17,12 @@ const Home = () => {
     fetchData();
   }, []);
   const fetchData = async () => {
-    const { count: contentCount } = await client
-      .from("supacontent_content")
+    const { count: contentCount } = await supacontent
+      .from("content")
       .select("*", { count: "exact" });
 
-    const { count: contentTypesCount } = await client
-      .from("supacontent_content_types")
+    const { count: contentTypesCount } = await supacontent
+      .from("content_types")
       .select("*", { count: "exact" });
     setCounts({
       content: contentCount,
@@ -42,8 +42,8 @@ const Home = () => {
       <ToggleEdit
         className="self-start"
         onSave={async (name) => {
-          await client
-            .from("supacontent_projects")
+          await supacontent
+            .from("projects")
             .update({
               name,
             })
