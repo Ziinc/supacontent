@@ -18,7 +18,7 @@ const Auth = () => {
               error: null,
               text: "Sign up email sent, check your email!",
             });
-            return res
+            return res;
           });
 
     if (error) {
@@ -30,7 +30,6 @@ const Auth = () => {
       });
     }
   };
-
 
   const forgotPassword = async (e) => {
     // Read more on https://supabase.com/docs/reference/javascript/reset-password-email#notes
@@ -63,10 +62,10 @@ const Auth = () => {
           "font-sans text-4xl text-center pb-2 mb-1 border-b mx-4 align-center"
         }
       >
-        Login
+        Supacontent
       </span>
       <label className={"mt-3 mb-2 font-medium text-lg"} htmlFor={"email"}>
-        <span className={"font-mono mr-1 text-red-400"}>*</span>Email:
+        <span className={"font-mono mr-1 text-red-400"}>*</span>Email
       </label>
       <input
         className={"bg-gray-100 border py-1 px-3"}
@@ -77,7 +76,7 @@ const Auth = () => {
       />
       <label className={"mt-3 mb-2 font-medium text-lg"} htmlFor={"password"}>
         <span className={"font-mono mr-1 text-red-400"}>*</span>
-        Password:
+        Password
       </label>
       <input
         className={"bg-gray-100 border py-1 px-3"}
