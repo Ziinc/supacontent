@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "esnext",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "target": "es6",
     "moduleResolution": "node",
-    "lib": ["dom", "ESNext"],
+    "lib": ["ESNext"],
     "outDir": "dist",
+    "allowJs": true
   },
-  "include": ["src/**/*", "tests/**/*"],
+  "include": ["src/**/*", "tests/**/*", "__mocks__/**/*"],
   "exclude": ["node_modules/**/*"]
 }
